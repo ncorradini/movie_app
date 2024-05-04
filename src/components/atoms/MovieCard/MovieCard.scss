@@ -1,0 +1,52 @@
+.movie-card {
+  max-width: 250px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: -1px 2px 7px 0px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #000;
+    > .movie-card_image > img {
+      transform: scale(1.2);
+    }
+  }
+
+  &_image {
+    width: 250px;
+    height: 375px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: 545px) {
+      height: 100px;
+    }
+    > img {
+      width: 100%;
+      transition: transform 0.3s;
+    }
+    &_not-available {
+      height: 99%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      > span {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  > div {
+    padding: 8px 12px;
+
+    h4 {
+      margin: 0;
+    }
+    span {
+      opacity: 0.5;
+    }
+  }
+}
