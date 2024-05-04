@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { moviesResponseSchema } from "api/schema";
+import { moviesResponseSchema } from "utils/schemas/movies.schema";
 import { API_KEY, API_URL } from "utils/constants";
 
 const OPTIONS = { method: "GET", headers: { accept: "application/json" } };

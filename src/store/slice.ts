@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TMovie } from "api/schema";
+import { TMovie } from "utils/schemas/movies.schema";
 import { getAllMovies, getSearchMovie } from "./actions";
 
 interface TInitialState {
