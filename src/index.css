@@ -4,9 +4,8 @@
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  background-color: #242424;
 }
 
-:root * {
-  color: #fff;
+body {
+  background-color: #242424;
 }

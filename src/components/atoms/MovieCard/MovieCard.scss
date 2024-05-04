@@ -15,7 +15,7 @@
 
   &_image {
     width: 250px;
-    height: 375px;
+    height: 300px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -28,11 +28,12 @@
       transition: transform 0.3s;
     }
     &_not-available {
-      height: 99%;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: #2f2f2f;
       > span {
         color: rgba(255, 255, 255, 0.6);
       }
@@ -44,9 +45,11 @@
 
     h4 {
       margin: 0;
+      color: #fff;
     }
     span {
       opacity: 0.5;
+      color: #fff;
     }
   }
 }

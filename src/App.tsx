@@ -1,8 +1,8 @@
-import MoviesView from "@Organisms/MoviesView/MoviesView";
+import MoviePage from "@Organisms/MoviePage/MoviePage";
 
 function App() {
   return (
-    <MoviesView />
+    <MoviePage />
   );
 }
 

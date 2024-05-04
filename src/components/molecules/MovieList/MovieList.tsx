@@ -1,24 +1,37 @@
-import './MovieList.scss';
-import { useEffect, useState } from "react";
-import { getAllMovies } from "../../../api/api";
+import "./MovieList.scss";
+import { useEffect } from "react";
 import MovieCard from "@Atoms/MovieCard/MovieCard";
-import { TMovie } from "api/schema";
+import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "hooks/useAppDispatch";
+import { getAllMovies } from "store/actions";
+import { Spinner } from "@fluentui/react";
 
 const MovieList = () => {
-  const [movies, setMovies] = useState<TMovie[]>([]);
+  const dispatch = useAppDispatch();
+  const { listMovies, isLoading, isError } = useAppSelector(
+    (state) => state.movies
+  );
 
   useEffect(() => {
-    const getMovies = async () => {
-      const moviesData = await getAllMovies();
-      if (moviesData) setMovies(moviesData.results);
-    };
-    getMovies();
+    dispatch(getAllMovies());
   }, []);
 
+  if (isLoading)
+    return (
+      <div className="loading-view">
+        <Spinner className="spinner" />
+      </div>
+    );
+
+  if (isError) return <p>Ha ocurrido un error...</p>;
+
   return (
-    <div className='movie-list'>
-      {movies.length > 0 &&
-        movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+    <div className="movie-list">
+      {listMovies.length > 0 ? (
+        listMovies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+      ) : (
+        <p>No se encontraron resultados</p>
+      )}
     </div>
   );
 };
