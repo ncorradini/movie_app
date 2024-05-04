@@ -1,16 +1,18 @@
-import "./MoviewView.scss";
+import "./MoviePage.scss";
 import { Text } from "@fluentui/react/lib/Text";
+import SearchInput from "@Atoms/SearchInput/SearchInput";
 import MovieList from "@Molecules/MovieList/MovieList";
 
-function MoviesView() {
+function MoviePage() {
   return (
     <div className="movies-view">
       <Text variant="xxLarge" as="h1">
-        Movie App
+        Peli App
       </Text>
+      <SearchInput />
       <MovieList />
     </div>
   );
 }
 
-export default MoviesView;
+export default MoviePage;
