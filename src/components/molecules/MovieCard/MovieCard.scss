@@ -11,7 +11,7 @@
   }
 
   &:hover {
-    background-color: #000;
+    background-color: $color_black;
     > .movie-card_image > div > img {
       transform: scale(1.2);
     }
@@ -51,11 +51,11 @@
 
     h4 {
       margin: 0;
-      color: #fff;
+      color: $color_white;
     }
     p {
       opacity: 0.5;
-      color: #fff;
+      color: $color_white;
     }
   }
 }

@@ -8,18 +8,18 @@
   }
 
   > p {
-    color: #fff;
+    color: $color_white;
   }
   &_button {
     height: 28px;
-    background-color: #ee6363;
+    background-color: $color-red-light;
     border: none;
     padding: 0;
     border-radius: 6px;
     transition: 0.3s;
     &:hover {
       opacity: 0.5;
-      background-color: #ee6363;
+      background-color: $color-red-light;
       border: none;
     }
     &:disabled {

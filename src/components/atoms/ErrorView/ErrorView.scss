@@ -3,19 +3,19 @@
   height: 300px;
   align-items: center;
   justify-content: center;
-  background-color: #242424;
+  background-color: $color-background-black;
   > p {
-    color: #fff;
+    color: $color_white;
     font-size: 18px;
   }
   > button {
-    background-color: #ff1c1c;
+    background-color: $color-red;
     border: none;
     border-radius: 6px;
     transition: 0.3s;
     &:hover {
       opacity: 0.5;
-      background-color: #ff1c1c;
+      background-color: $color-red;
       border: none;
     }
   }
