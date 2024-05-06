@@ -8,7 +8,7 @@
 
   &:hover {
     background-color: #000;
-    > .movie-card_image > img {
+    > .movie-card_image > div > img {
       transform: scale(1.2);
     }
   }
@@ -23,7 +23,7 @@
     @media (max-width: 545px) {
       height: 100px;
     }
-    > img {
+    > div > img {
       width: 100%;
       transition: transform 0.3s;
     }
