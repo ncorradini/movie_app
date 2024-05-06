@@ -15,7 +15,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     clearMovieModalCache: (state: TInitialState) => {
-      state.movieModal = null;
+      state.movieModal.movie = null;
     },
   },
   extraReducers: (builder) => {

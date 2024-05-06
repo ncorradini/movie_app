@@ -4,16 +4,20 @@ export type TInitialState = {
   listMovies: TMovie[];
   isLoading: boolean;
   isError: boolean;
-  movieModal: TMovieById | null;
-  isLoadingModal: boolean;
-  isErrorModal: boolean;
+  movieModal: {
+    movie: TMovieById | null;
+    isLoading: boolean;
+    isError: boolean;
+  };
 };
 
 export const initialState: TInitialState = {
   listMovies: [],
   isLoading: false,
   isError: false,
-  movieModal: null,
-  isLoadingModal: false,
-  isErrorModal: false,
+  movieModal: {
+    movie: null,
+    isLoading: false,
+    isError: false,
+  },
 };

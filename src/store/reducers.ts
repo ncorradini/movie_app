@@ -21,19 +21,19 @@ export const handleRequestRejected = (state: TInitialState) => {
 };
 
 export const handleMovieRequestPending = (state: TInitialState) => {
-  state.isLoadingModal = true;
-  state.isErrorModal = false;
+  state.movieModal.isLoading = true;
+  state.movieModal.isError = false;
 };
 
 export const handleMovieRequestFulfilled = (
   state: TInitialState,
   action: PayloadAction<TMovieById>
 ) => {
-  state.isLoadingModal = false;
-  state.movieModal = action.payload;
+  state.movieModal.isLoading = false;
+  state.movieModal.movie = action.payload;
 };
 
 export const handleMovieRequestRejected = (state: TInitialState) => {
-  state.isLoadingModal = false;
-  state.isErrorModal = true;
+  state.movieModal.isLoading = false;
+  state.movieModal.isError = true;
 };

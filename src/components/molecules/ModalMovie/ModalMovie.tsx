@@ -22,9 +22,9 @@ const ModalMovie = ({
   showModal,
 }: ModalMovieProps) => {
   const dispatch = useAppDispatch();
-  const { movieModal, isLoadingModal, isErrorModal } = useAppSelector(
-    (state) => state.movies
-  );
+  const {
+    movieModal: { movie, isLoading, isError },
+  } = useAppSelector((state) => state.movies);
 
   const reloadModal = () => {
     hideModal();
@@ -34,11 +34,11 @@ const ModalMovie = ({
   };
 
   useEffect(() => {
-    if (isModalOpen && !movieModal) {
+    if (isModalOpen && !movie) {
       dispatch(getMovieById(id));
     }
 
-    if (!isModalOpen && movieModal) {
+    if (!isModalOpen && movie) {
       dispatch(clearMovieModalCache());
     }
   }, [isModalOpen]);
@@ -50,13 +50,13 @@ const ModalMovie = ({
       isBlocking={false}
       className="modal-movie"
     >
-      {isLoadingModal && (
+      {isLoading && (
         <Stack as="div" className="modal-movie_loading-view">
           <Spinner styles={{ circle: { height: "40px", width: "40px" } }} />
         </Stack>
       )}
 
-      {movieModal && (
+      {movie && (
         <Stack as="article" className="modal-movie_detail">
           <button
             className="modal-movie_detail_close-button"
@@ -65,23 +65,21 @@ const ModalMovie = ({
             X
           </button>
           <Image
-            src={`${IMAGE_URL_HIGH_DEFINITION}/${movieModal.poster_path}`}
+            src={`${IMAGE_URL_HIGH_DEFINITION}/${movie.poster_path}`}
             alt="Poster de la película"
             className="modal-movie_detail_poster"
           />
           <Stack as="div" className="modal-movie_detail_content">
-            <Text as="h3">{movieModal.title}</Text>
+            <Text as="h3">{movie.title}</Text>
+            <Text as="p">{movie.overview || "Descripción no disponible"}</Text>
             <Text as="p">
-              {movieModal.overview || "Descripción no disponible"}
-            </Text>
-            <Text as="p">
-              Valoración: {movieModal.vote_average.toFixed(1) || "N/D"}
+              Valoración: {movie.vote_average.toFixed(1) || "N/D"}
             </Text>
           </Stack>
         </Stack>
       )}
 
-      {isErrorModal && (
+      {isError && (
         <ErrorView textAction="Recargar modal" action={reloadModal} />
       )}
     </Modal>
