@@ -10,5 +10,12 @@ export default defineConfig(({ mode }) => {
       "process.env": env,
     },
     plugins: [react(), tsconfigPaths()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "./src/styles/global.scss";',
+        },
+      },
+    },
   };
 });

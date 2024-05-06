@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  flex-direction: row;
   gap: 30px;
 }
 
@@ -11,9 +12,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .circle-130 {
-    width: 60px;
-    height: 60px;
-  }
 }

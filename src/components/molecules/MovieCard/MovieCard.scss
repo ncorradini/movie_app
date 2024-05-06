@@ -40,14 +40,14 @@
     }
   }
 
-  > div {
+  &_content {
     padding: 8px 12px;
 
     h4 {
       margin: 0;
       color: #fff;
     }
-    span {
+    p {
       opacity: 0.5;
       color: #fff;
     }
