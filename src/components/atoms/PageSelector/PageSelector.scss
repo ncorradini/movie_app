@@ -1,0 +1,30 @@
+.page-selector {
+  margin-left: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  @media (max-width: 800px) {
+    margin: auto;
+  }
+
+  > p {
+    color: #fff;
+  }
+  &_button {
+    height: 28px;
+    background-color: #ee6363;
+    border: none;
+    padding: 0;
+    border-radius: 6px;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.5;
+      background-color: #ee6363;
+      border: none;
+    }
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}

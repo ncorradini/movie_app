@@ -1,12 +1,22 @@
 .movies-view {
   max-width: 1400px;
   margin: auto;
-  display: flex;
   flex-direction: column;
   gap: 30px;
-  
+
   &_title {
     text-align: center;
     color: #fff;
+  }
+
+  &_controls {
+    flex-direction: row;
+    align-items: center;
+    max-width: 1370px;
+    width: 100%;
+    margin: auto;
+    @media (max-width: 800px) {
+      flex-direction: column;
+    }
   }
 }

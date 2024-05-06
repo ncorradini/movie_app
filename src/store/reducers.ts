@@ -9,10 +9,16 @@ export const handleRequestPending = (state: TInitialState) => {
 
 export const handleRequestFulfilled = (
   state: TInitialState,
-  action: PayloadAction<{ results: TMovie[] }>
+  action: PayloadAction<{
+    results: TMovie[];
+    page: number;
+    total_pages: number;
+  }>
 ) => {
   state.isLoading = false;
   state.listMovies = action.payload.results;
+  state.pagination.page = action.payload.page;
+  state.pagination.totalPages = action.payload.total_pages;
 };
 
 export const handleRequestRejected = (state: TInitialState) => {

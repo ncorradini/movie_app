@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState, TInitialState } from "./initialState";
 import { getAllMovies, getMovieById, getSearchMovie } from "./actions";
 import {
@@ -16,6 +16,12 @@ const movieSlice = createSlice({
   reducers: {
     clearMovieModalCache: (state: TInitialState) => {
       state.movieModal.movie = null;
+    },
+    setSearchQuery: (
+      state: TInitialState,
+      action: PayloadAction<{ query: string }>
+    ) => {
+      state.searchQuery = action.payload.query;
     },
   },
   extraReducers: (builder) => {
@@ -35,6 +41,6 @@ const movieSlice = createSlice({
   },
 });
 
-export const { clearMovieModalCache } = movieSlice.actions;
+export const { clearMovieModalCache, setSearchQuery } = movieSlice.actions;
 
 export default movieSlice.reducer;

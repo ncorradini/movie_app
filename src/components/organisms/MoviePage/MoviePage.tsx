@@ -1,8 +1,8 @@
 import "./MoviePage.scss";
-import { Text } from "@fluentui/react/lib/Text";
+import { Stack, Text } from "@fluentui/react";
 import SearchInput from "@Atoms/SearchInput/SearchInput";
 import MovieList from "@Organisms/MovieList/MovieList";
-import { Stack } from "@fluentui/react";
+import PageSelector from "@Atoms/PageSelector/PageSelector";
 
 function MoviePage() {
   return (
@@ -10,7 +10,10 @@ function MoviePage() {
       <Text variant="xxLarge" as="h1" className="movies-view_title">
         Peli App
       </Text>
-      <SearchInput />
+      <Stack as='div' className='movies-view_controls'>
+        <SearchInput />
+        <PageSelector />
+      </Stack>
       <MovieList />
     </Stack>
   );

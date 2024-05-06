@@ -9,9 +9,9 @@ const OPTIONS = { method: "GET", headers: { accept: "application/json" } };
 
 export const getAllMovies = createAsyncThunk(
   "movies/getAllMovies",
-  async () => {
+  async ({ page = "1" }: { page?: string }) => {
     const response = await fetch(
-      `${API_URL}/discover/movie?api_key=${API_KEY}&language=es-ES`,
+      `${API_URL}/discover/movie?api_key=${API_KEY}&language=es-ES&page=${page}`,
       OPTIONS
     );
     const data = await response.json();
@@ -21,9 +21,9 @@ export const getAllMovies = createAsyncThunk(
 
 export const getSearchMovie = createAsyncThunk(
   "movies/getSearchMovie",
-  async (query: string) => {
+  async ({ query = "", page = "1" }: { query?: string; page?: string }) => {
     const response = await fetch(
-      `${API_URL}/search/movie?api_key=${API_KEY}&language=es-ES&query=${query}`,
+      `${API_URL}/search/movie?api_key=${API_KEY}&language=es-ES&query=${query}&page=${page}`,
       OPTIONS
     );
     const data = await response.json();
