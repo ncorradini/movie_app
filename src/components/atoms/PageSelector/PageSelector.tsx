@@ -16,7 +16,9 @@ const PageSelector = () => {
     pagination: { page, totalPages },
     searchQuery,
   } = useAppSelector((state) => state.movies);
-  const { updateQueryParam, deleteQueryParam } = UseQueryParam();
+  const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
+
+  const yearParam = getQueryParam("year");
 
   const handlePageChange = (direction: PageDirection) => {
     if (
@@ -31,9 +33,15 @@ const PageSelector = () => {
         : String(Number(page) - 1);
 
     if (searchQuery) {
-      dispatch(getSearchMovie({ query: searchQuery, page: viewPage }));
+      dispatch(
+        getSearchMovie({
+          query: searchQuery,
+          page: viewPage,
+          year: yearParam || undefined,
+        })
+      );
     } else {
-      dispatch(getAllMovies({ page: viewPage }));
+      dispatch(getAllMovies({ page: viewPage, year: yearParam || undefined }));
     }
 
     if (Number(viewPage) > 1) {

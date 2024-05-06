@@ -1,6 +1,7 @@
 const UseQueryParam = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+
   const updateQueryParam = (paramName: string, paramValue: string) => {
-    const urlParams = new URLSearchParams(window.location.search);
     urlParams.set(paramName, paramValue);
 
     const paramsString = urlParams.toString();
@@ -10,12 +11,10 @@ const UseQueryParam = () => {
   };
 
   const getQueryParam = (paramName: string) => {
-    const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(paramName);
   };
 
   const deleteQueryParam = (paramName: string) => {
-    const urlParams = new URLSearchParams(window.location.search);
     urlParams.delete(paramName);
 
     const paramsString = urlParams.toString();

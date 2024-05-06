@@ -10,6 +10,7 @@ import UseQueryParam from "hooks/useQueryParam";
 const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [firstRender, setFirstRender] = useState<boolean>(true);
+
   const dispatch = useAppDispatch();
   const { searchQuery } = useAppSelector((state) => state.movies);
   const { updateQueryParam, deleteQueryParam } = UseQueryParam();
@@ -22,6 +23,7 @@ const SearchInput = () => {
 
     if (searchTerm.trim() !== "") {
       deleteQueryParam("page");
+      deleteQueryParam("year");
       updateQueryParam("search", searchTerm);
     } else {
       deleteQueryParam("search");
