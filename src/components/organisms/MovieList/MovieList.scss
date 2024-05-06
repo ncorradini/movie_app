@@ -1,5 +1,4 @@
 .movie-list {
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: row;
@@ -9,7 +8,6 @@
 .loading-view {
   width: 100%;
   height: 300px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }

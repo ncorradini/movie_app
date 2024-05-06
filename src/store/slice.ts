@@ -1,60 +1,14 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TMovie, TMovieById } from "utils/schemas/movies.schema";
+import { createSlice } from "@reduxjs/toolkit";
+import { initialState, TInitialState } from "./initialState";
 import { getAllMovies, getMovieById, getSearchMovie } from "./actions";
-
-interface TInitialState {
-  listMovies: TMovie[];
-  isLoading: boolean;
-  isError: boolean;
-  movieModal: TMovieById | null;
-  isLoadingModal: boolean;
-  isErrorModal: boolean;
-}
-
-const initialState: TInitialState = {
-  listMovies: [],
-  isLoading: false,
-  isError: false,
-  movieModal: null,
-  isLoadingModal: false,
-  isErrorModal: false,
-};
-
-const handleRequestPending = (state: TInitialState) => {
-  state.isLoading = true;
-  state.isError = false;
-};
-
-const handleRequestFulfilled = (
-  state: TInitialState,
-  action: PayloadAction<{ results: TMovie[] }>
-) => {
-  state.isLoading = false;
-  state.listMovies = action.payload.results;
-};
-
-const handleRequestRejected = (state: TInitialState) => {
-  state.isLoading = false;
-  state.isError = true;
-};
-
-const handleMovieRequestPending = (state: TInitialState) => {
-  state.isLoadingModal = true;
-  state.isErrorModal = false;
-};
-
-const handleMovieRequestFulfilled = (
-  state: TInitialState,
-  action: PayloadAction<TMovieById>
-) => {
-  state.isLoadingModal = false;
-  state.movieModal = action.payload;
-};
-
-const handleMovieRequestRejected = (state: TInitialState) => {
-  state.isLoadingModal = false;
-  state.isErrorModal = true;
-};
+import {
+  handleMovieRequestFulfilled,
+  handleMovieRequestPending,
+  handleMovieRequestRejected,
+  handleRequestFulfilled,
+  handleRequestPending,
+  handleRequestRejected,
+} from "./reducers";
 
 const movieSlice = createSlice({
   name: "movies",

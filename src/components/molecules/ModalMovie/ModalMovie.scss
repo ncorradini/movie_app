@@ -5,7 +5,6 @@
     width: 500px;
     height: 600px;
     max-height: 600px;
-    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #161616;
@@ -18,7 +17,6 @@
     position: relative;
     height: 600px;
     width: 500px;
-    display: flex;
     @media (max-width: 545px) {
       width: 100%;
     }
