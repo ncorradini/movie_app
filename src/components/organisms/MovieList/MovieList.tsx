@@ -2,12 +2,17 @@ import "./MovieList.scss";
 import { useEffect } from "react";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
-import { getAllMovies } from "store/actions";
+import { getAllMovies, getSearchMovie } from "store/actions";
 import { Spinner, Stack, Text } from "@fluentui/react";
 import MovieCardWithModal from "@Molecules/MovieCardWithModal/MovieCardWithModal";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
+import { setSearchQuery } from "store/slice";
 
 export const MovieList = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchParam = urlParams.get("search");
+  const pageParam = urlParams.get("page");
+
   const dispatch = useAppDispatch();
   const { listMovies, isLoading, isError } = useAppSelector(
     (state) => state.movies
@@ -15,9 +20,29 @@ export const MovieList = () => {
 
   const reloadPage = () => window.location.reload();
 
+  const fetchMovies = () => {
+    let page = pageParam || "1";
+
+    if (isNaN(parseInt(page))) {
+      page = "1";
+    }
+
+    if (searchParam) {
+      dispatch(setSearchQuery({ query: searchParam }));
+      dispatch(getSearchMovie({ query: searchParam, page }));
+    } else {
+      dispatch(getAllMovies({ page }));
+    }
+  };
+
   useEffect(() => {
-    dispatch(getAllMovies());
-  }, []);
+    if (pageParam || searchParam) {
+      fetchMovies();
+      return;
+    }
+
+    dispatch(getAllMovies({}));
+  }, [pageParam, searchParam]);
 
   if (isLoading)
     return (

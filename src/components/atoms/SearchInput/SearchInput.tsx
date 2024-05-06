@@ -1,25 +1,42 @@
 import "./SearchInput.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "@fluentui/react";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { getAllMovies, getSearchMovie } from "store/actions";
+import { setSearchQuery } from "store/slice";
+import { useAppSelector } from "hooks/useAppSelector";
+import UseQueryParam from "hooks/useQueryParam";
 
 const SearchInput = () => {
-  const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [firstRender, setFirstRender] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const { searchQuery } = useAppSelector((state) => state.movies);
+  const { updateQueryParam, deleteQueryParam } = UseQueryParam();
 
-  const handleSearch = (e: any) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const searchTerm = (e.target as HTMLInputElement).value;
+    setSearchTerm(searchTerm);
+
+    if (searchTerm.trim() !== "") {
+      deleteQueryParam("page");
+      updateQueryParam("search", searchTerm);
+    } else {
+      deleteQueryParam("search");
+    }
   };
 
   useEffect(() => {
-    if (searchTerm.length > 2) {
-      dispatch(getSearchMovie(searchTerm));
+    if (searchTerm) {
+      dispatch(setSearchQuery({ query: searchTerm }));
+      dispatch(getSearchMovie({ query: searchTerm }));
     }
 
     if (!firstRender && searchTerm === "") {
-      dispatch(getAllMovies());
+      dispatch(setSearchQuery({ query: "" }));
+      dispatch(getAllMovies({}));
     }
 
     setFirstRender(false);
@@ -30,6 +47,7 @@ const SearchInput = () => {
       className="search-input"
       placeholder="¿Qué película quieres ver?"
       onChange={handleSearch}
+      value={searchQuery || ""}
     />
   );
 };
