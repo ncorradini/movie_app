@@ -19,3 +19,14 @@ export const handleMovieRequestRejected = (state: TInitialState) => {
   state.movieModal.isLoading = false;
   state.movieModal.isError = true;
 };
+
+export const setMovieModalId = (
+  state: TInitialState,
+  action: PayloadAction<{ idMovie: number | null }>
+) => {
+  state.movieModal.id = action.payload.idMovie;
+};
+
+export const clearMovieModalCache = (state: TInitialState) => {
+  state.movieModal.movie = null;
+};

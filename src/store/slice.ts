@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState, TInitialState } from "./states/root";
+import { createSlice } from "@reduxjs/toolkit";
+import { initialState } from "./states/root";
 
 import { getAllMovies, getSearchMovie } from "./actions/movies";
 import { getMovieById } from "./actions/movie-modal";
@@ -8,32 +8,23 @@ import {
   handleMoviesRequestFulfilled,
   handleMoviesRequestPending,
   handleMoviesRequestRejected,
+  setSearchQuery as setsearchQueryReducer,
 } from "./reducers/movies";
 import {
   handleMovieRequestFulfilled,
   handleMovieRequestPending,
   handleMovieRequestRejected,
+  setMovieModalId as setMovieModalIdReducer,
+  clearMovieModalCache as clearMovieModalCacheReducer,
 } from "./reducers/movie-modal";
 
 const movieSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    clearMovieModalCache: (state: TInitialState) => {
-      state.movieModal.movie = null;
-    },
-    setSearchQuery: (
-      state: TInitialState,
-      action: PayloadAction<{ query: string }>
-    ) => {
-      state.movies.searchQuery = action.payload.query;
-    },
-    setMovieModalId: (
-      state: TInitialState,
-      action: PayloadAction<{ idMovie: number | null }>
-    ) => {
-      state.movieModal.id = action.payload.idMovie;
-    },
+    clearMovieModalCache: clearMovieModalCacheReducer,
+    setSearchQuery: setsearchQueryReducer,
+    setMovieModalId: setMovieModalIdReducer,
   },
   extraReducers: (builder) => {
     builder

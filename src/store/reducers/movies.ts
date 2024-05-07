@@ -25,3 +25,10 @@ export const handleMoviesRequestRejected = (state: TInitialState) => {
   state.movies.isLoading = false;
   state.movies.isError = true;
 };
+
+export const setSearchQuery = (
+  state: TInitialState,
+  action: PayloadAction<{ query: string }>
+) => {
+  state.movies.searchQuery = action.payload.query;
+};
