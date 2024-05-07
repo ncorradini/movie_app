@@ -1,6 +1,14 @@
 import "./ModalMovie.scss";
 import { useEffect } from "react";
-import { Image, Modal, Spinner, Stack, Text } from "@fluentui/react";
+import {
+  Icon,
+  IconButton,
+  Image,
+  Modal,
+  Spinner,
+  Stack,
+  Text,
+} from "@fluentui/react";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { useAppSelector } from "hooks/useAppSelector";
 import { getMovieById } from "store/actions/movie-modal";
@@ -50,12 +58,12 @@ const ModalMovie = () => {
 
       {movie && (
         <Stack as="article" className="modal-movie__detail">
-          <button
+          <IconButton
             className="modal-movie__detail_close-button"
             onClick={hideModal}
           >
-            X
-          </button>
+            <Icon iconName="ChromeClose" />
+          </IconButton>
           <Image
             src={`${IMAGE_URL_HIGH_DEFINITION}/${movie.poster_path}`}
             alt="Poster de la película"
