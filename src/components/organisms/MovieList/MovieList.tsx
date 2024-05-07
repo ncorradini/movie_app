@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { getAllMovies, getSearchMovie } from "store/actions/movies";
-import { Spinner, Stack, Text } from "@fluentui/react";
+import { Spinner, Stack } from "@fluentui/react";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
 import { setSearchQuery } from "store/slice";
 import UseQueryParam from "hooks/useQueryParam";
 import MovieCard from "@Molecules/MovieCard/MovieCard";
 import ModalMovie from "@Molecules/ModalMovie/ModalMovie";
+import NotResultsView from "@Atoms/NotResultsView/NotResultsView";
 
 export const MovieList = () => {
   const { getQueryParam, deleteQueryParam } = UseQueryParam();
@@ -73,9 +74,9 @@ export const MovieList = () => {
     <Stack as="section" className="movie-list">
       <ModalMovie />
       {list.length > 0 ? (
-        list.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+        list?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
       ) : (
-        <Text as="p">No se encontraron resultados</Text>
+        <NotResultsView />
       )}
     </Stack>
   );

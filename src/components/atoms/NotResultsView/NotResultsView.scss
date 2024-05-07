@@ -1,0 +1,10 @@
+.not-results-view {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > h3 {
+    color: $color-white;
+    font-size: 18px;
+  }
+}
