@@ -15,7 +15,9 @@ const SearchInput = () => {
   const {
     movies: { searchQuery },
   } = useAppSelector((state) => state.movies);
-  const { updateQueryParam, deleteQueryParam } = UseQueryParam();
+  const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
+
+  const yearParam = getQueryParam("year");
 
   const handleSearch = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,7 +27,6 @@ const SearchInput = () => {
 
     if (searchTerm.trim() !== "") {
       deleteQueryParam("page");
-      deleteQueryParam("year");
       updateQueryParam("search", searchTerm);
     } else {
       deleteQueryParam("search");
@@ -35,7 +36,9 @@ const SearchInput = () => {
   useEffect(() => {
     if (searchTerm) {
       dispatch(setSearchQuery({ query: searchTerm }));
-      dispatch(getSearchMovie({ query: searchTerm }));
+      dispatch(
+        getSearchMovie({ query: searchTerm, year: yearParam || undefined })
+      );
     }
 
     if (!firstRender && searchTerm === "") {
