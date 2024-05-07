@@ -5,7 +5,7 @@
   box-shadow: -1px 2px 7px 0px rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: 0.3s;
-  @media (max-width: 545px) {
+  @media (max-width: $small-screen) {
     max-width: none;
     width: 100%;
   }
@@ -23,7 +23,7 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
-    @media (max-width: 545px) {
+    @media (max-width: $small-screen) {
       height: 100px;
       width: 100%;
     }

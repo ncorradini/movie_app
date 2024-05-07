@@ -15,7 +15,7 @@
     max-width: 1370px;
     width: 100%;
     margin: auto;
-    @media (max-width: 1200px) {
+    @media (max-width: $large-screen) {
       flex-direction: column;
       gap: 20px;
     }

@@ -2,7 +2,7 @@
   flex-direction: row;
   gap: 15px;
   margin: 0 50px;
-  @media (max-width: 1200px) {
+  @media (max-width: $large-screen) {
     flex-direction: column;
     width: 100%;
   }
@@ -10,11 +10,11 @@
   &__label {
     color: $color_white;
     margin: auto;
-    @media (max-width: 1200px) {
+    @media (max-width: $large-screen) {
       max-width: 700px;
       width: 50%;
     }
-    @media (max-width: 800px) {
+    @media (max-width: $medium-screen) {
       width: 100%;
     }
   }
@@ -22,11 +22,11 @@
   &__dropdown {
     width: 150px;
     margin: auto;
-    @media (max-width: 1200px) {
+    @media (max-width: $large-screen) {
       max-width: 700px;
       width: 50%;
     }
-    @media (max-width: 800px) {
+    @media (max-width: $medium-screen) {
       width: 100%;
     }
   }

@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  @media (max-width: 1200px) {
+  @media (max-width: $large-screen) {
     margin: auto;
   }
 
