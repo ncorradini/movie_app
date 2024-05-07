@@ -8,10 +8,10 @@ import PageSelector from "@Atoms/PageSelector/PageSelector";
 function MoviePage() {
   return (
     <Stack as="main" className="movies-view">
-      <Text variant="xxLarge" as="h1" className="movies-view_title">
+      <Text variant="xxLarge" as="h1" className="movies-view__title">
         Peli App
       </Text>
-      <Stack as="div" className="movies-view_controls">
+      <Stack as="div" className="movies-view__controls">
         <SearchInput />
         <DateSelector />
         <PageSelector />

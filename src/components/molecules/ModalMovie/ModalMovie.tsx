@@ -43,15 +43,15 @@ const ModalMovie = () => {
       className="modal-movie"
     >
       {isLoading && (
-        <Stack as="div" className="modal-movie_loading-view">
+        <Stack as="div" className="modal-movie__loading-view">
           <Spinner styles={{ circle: { height: "40px", width: "40px" } }} />
         </Stack>
       )}
 
       {movie && (
-        <Stack as="article" className="modal-movie_detail">
+        <Stack as="article" className="modal-movie__detail">
           <button
-            className="modal-movie_detail_close-button"
+            className="modal-movie__detail_close-button"
             onClick={hideModal}
           >
             X
@@ -59,9 +59,9 @@ const ModalMovie = () => {
           <Image
             src={`${IMAGE_URL_HIGH_DEFINITION}/${movie.poster_path}`}
             alt="Poster de la película"
-            className="modal-movie_detail_poster"
+            className="modal-movie__detail_poster"
           />
-          <Stack as="div" className="modal-movie_detail_content">
+          <Stack as="div" className="modal-movie__detail_content">
             <Text as="h3">{movie.title}</Text>
             <Text as="p">{movie.overview || "Descripción no disponible"}</Text>
             <Text as="p">

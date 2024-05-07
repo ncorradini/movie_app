@@ -78,7 +78,7 @@ const DateSelector = () => {
 
   return (
     <Stack as="div" className="date-selector">
-      <Label htmlFor="year" className="date-selector_label">
+      <Label htmlFor="year" className="date-selector__label">
         Filtrar por año:
       </Label>
       <Dropdown
@@ -87,7 +87,7 @@ const DateSelector = () => {
         selectedKey={dateSelected}
         onChange={handleYearChange}
         options={[{ key: OPTION_ALL_VALUES, text: "Todos" }, ...YEAR_OPTIONS]}
-        className="date-selector_dropdown"
+        className="date-selector__dropdown"
       />
     </Stack>
   );

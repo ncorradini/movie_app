@@ -63,7 +63,7 @@ const PageSelector = () => {
     <Stack as="nav" className="page-selector">
       <PrimaryButton
         onClick={handlePrevPage}
-        className="page-selector_button"
+        className="page-selector__button"
         disabled={isDisabledPrevButton}
       >
         Anterior
@@ -73,7 +73,7 @@ const PageSelector = () => {
       </Text>
       <PrimaryButton
         onClick={handleNextPage}
-        className="page-selector_button"
+        className="page-selector__button"
         disabled={isDisabledNextButton}
       >
         Siguiente

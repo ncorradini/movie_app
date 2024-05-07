@@ -7,7 +7,7 @@
     width: 100%;
   }
 
-  &_label {
+  &__label {
     color: $color_white;
     margin: auto;
     @media (max-width: 1200px) {
@@ -19,7 +19,7 @@
     }
   }
 
-  &_dropdown {
+  &__dropdown {
     width: 150px;
     margin: auto;
     @media (max-width: 1200px) {

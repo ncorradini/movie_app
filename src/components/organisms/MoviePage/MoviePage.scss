@@ -4,12 +4,12 @@
   flex-direction: column;
   gap: 30px;
 
-  &_title {
+  &__title {
     text-align: center;
     color: $color_white;
   }
 
-  &_controls {
+  &__controls {
     flex-direction: row;
     align-items: center;
     max-width: 1370px;
