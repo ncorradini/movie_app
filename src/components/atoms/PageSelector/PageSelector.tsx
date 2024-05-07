@@ -1,9 +1,9 @@
 import "./PageSelector.scss";
 import { useAppSelector } from "hooks/useAppSelector";
 import { PrimaryButton, Stack, Text } from "@fluentui/react";
-import { getAllMovies, getSearchMovie } from "store/actions";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import UseQueryParam from "hooks/useQueryParam";
+import { getAllMovies, getSearchMovie } from "store/actions/movies";
 
 enum PageDirection {
   NEXT = "next",
@@ -13,8 +13,10 @@ enum PageDirection {
 const PageSelector = () => {
   const dispatch = useAppDispatch();
   const {
-    pagination: { page, totalPages },
-    searchQuery,
+    movies: {
+      pagination: { page, totalPages },
+      searchQuery,
+    },
   } = useAppSelector((state) => state.movies);
   const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
 

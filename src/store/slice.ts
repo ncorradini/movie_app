@@ -1,14 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState, TInitialState } from "./initialState";
-import { getAllMovies, getMovieById, getSearchMovie } from "./actions";
+import { initialState, TInitialState } from "./states/root";
+
+import { getAllMovies, getSearchMovie } from "./actions/movies";
+import { getMovieById } from "./actions/movie-modal";
+
+import {
+  handleMoviesRequestFulfilled,
+  handleMoviesRequestPending,
+  handleMoviesRequestRejected,
+} from "./reducers/movies";
 import {
   handleMovieRequestFulfilled,
   handleMovieRequestPending,
   handleMovieRequestRejected,
-  handleRequestFulfilled,
-  handleRequestPending,
-  handleRequestRejected,
-} from "./reducers";
+} from "./reducers/movie-modal";
 
 const movieSlice = createSlice({
   name: "movies",
@@ -21,19 +26,25 @@ const movieSlice = createSlice({
       state: TInitialState,
       action: PayloadAction<{ query: string }>
     ) => {
-      state.searchQuery = action.payload.query;
+      state.movies.searchQuery = action.payload.query;
+    },
+    setMovieModalId: (
+      state: TInitialState,
+      action: PayloadAction<{ idMovie: number | null }>
+    ) => {
+      state.movieModal.id = action.payload.idMovie;
     },
   },
   extraReducers: (builder) => {
     builder
       // Get all movies
-      .addCase(getAllMovies.pending, handleRequestPending)
-      .addCase(getAllMovies.fulfilled, handleRequestFulfilled)
-      .addCase(getAllMovies.rejected, handleRequestRejected)
+      .addCase(getAllMovies.pending, handleMoviesRequestPending)
+      .addCase(getAllMovies.fulfilled, handleMoviesRequestFulfilled)
+      .addCase(getAllMovies.rejected, handleMoviesRequestRejected)
       // Get movies by query
-      .addCase(getSearchMovie.pending, handleRequestPending)
-      .addCase(getSearchMovie.fulfilled, handleRequestFulfilled)
-      .addCase(getSearchMovie.rejected, handleRequestRejected)
+      .addCase(getSearchMovie.pending, handleMoviesRequestPending)
+      .addCase(getSearchMovie.fulfilled, handleMoviesRequestFulfilled)
+      .addCase(getSearchMovie.rejected, handleMoviesRequestRejected)
       // Get movie by id
       .addCase(getMovieById.pending, handleMovieRequestPending)
       .addCase(getMovieById.fulfilled, handleMovieRequestFulfilled)
@@ -41,6 +52,7 @@ const movieSlice = createSlice({
   },
 });
 
-export const { clearMovieModalCache, setSearchQuery } = movieSlice.actions;
+export const { clearMovieModalCache, setSearchQuery, setMovieModalId } =
+  movieSlice.actions;
 
 export default movieSlice.reducer;

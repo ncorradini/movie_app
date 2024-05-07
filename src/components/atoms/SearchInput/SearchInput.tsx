@@ -2,7 +2,7 @@ import "./SearchInput.scss";
 import React, { useEffect, useState } from "react";
 import { TextField } from "@fluentui/react";
 import { useAppDispatch } from "hooks/useAppDispatch";
-import { getAllMovies, getSearchMovie } from "store/actions";
+import { getAllMovies, getSearchMovie } from "store/actions/movies";
 import { setSearchQuery } from "store/slice";
 import { useAppSelector } from "hooks/useAppSelector";
 import UseQueryParam from "hooks/useQueryParam";
@@ -12,7 +12,9 @@ const SearchInput = () => {
   const [firstRender, setFirstRender] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
-  const { searchQuery } = useAppSelector((state) => state.movies);
+  const {
+    movies: { searchQuery },
+  } = useAppSelector((state) => state.movies);
   const { updateQueryParam, deleteQueryParam } = UseQueryParam();
 
   const handleSearch = (

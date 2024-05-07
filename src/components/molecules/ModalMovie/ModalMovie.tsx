@@ -3,49 +3,41 @@ import { useEffect } from "react";
 import { Image, Modal, Spinner, Stack, Text } from "@fluentui/react";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { useAppSelector } from "hooks/useAppSelector";
-import { getMovieById } from "store/actions";
-import { clearMovieModalCache } from "store/slice";
+import { getMovieById } from "store/actions/movie-modal";
+import { clearMovieModalCache, setMovieModalId } from "store/slice";
 import { IMAGE_URL_HIGH_DEFINITION } from "utils/constants";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
 
-type ModalMovieProps = {
-  id: number;
-  isModalOpen: boolean;
-  hideModal: () => void;
-  showModal: () => void;
-};
-
-const ModalMovie = ({
-  id,
-  isModalOpen,
-  hideModal,
-  showModal,
-}: ModalMovieProps) => {
+const ModalMovie = () => {
   const dispatch = useAppDispatch();
   const {
-    movieModal: { movie, isLoading, isError },
+    movieModal: { id, movie, isLoading, isError },
   } = useAppSelector((state) => state.movies);
+
+  const hideModal = () => {
+    dispatch(setMovieModalId({ idMovie: null }));
+  };
 
   const reloadModal = () => {
     hideModal();
     setTimeout(() => {
-      showModal();
+      dispatch(setMovieModalId({ idMovie: id }));
     }, 200);
   };
 
   useEffect(() => {
-    if (isModalOpen && !movie) {
+    if (id && !movie) {
       dispatch(getMovieById(id));
     }
 
-    if (!isModalOpen && movie) {
+    if (!id && movie) {
       dispatch(clearMovieModalCache());
     }
-  }, [isModalOpen]);
+  }, [id]);
 
   return (
     <Modal
-      isOpen={isModalOpen}
+      isOpen={Boolean(id)}
       onDismiss={hideModal}
       isBlocking={false}
       className="modal-movie"

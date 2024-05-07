@@ -2,12 +2,13 @@ import "./MovieList.scss";
 import { useEffect } from "react";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
-import { getAllMovies, getSearchMovie } from "store/actions";
+import { getAllMovies, getSearchMovie } from "store/actions/movies";
 import { Spinner, Stack, Text } from "@fluentui/react";
-import MovieCardWithModal from "@Molecules/MovieCardWithModal/MovieCardWithModal";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
 import { setSearchQuery } from "store/slice";
 import UseQueryParam from "hooks/useQueryParam";
+import MovieCard from "@Molecules/MovieCard/MovieCard";
+import ModalMovie from "@Molecules/ModalMovie/ModalMovie";
 
 export const MovieList = () => {
   const { getQueryParam, deleteQueryParam } = UseQueryParam();
@@ -16,9 +17,9 @@ export const MovieList = () => {
   const yearParam = getQueryParam("year");
 
   const dispatch = useAppDispatch();
-  const { listMovies, isLoading, isError } = useAppSelector(
-    (state) => state.movies
-  );
+  const {
+    movies: { list, isLoading, isError },
+  } = useAppSelector((state) => state.movies);
 
   const reloadPage = () => window.location.reload();
 
@@ -70,10 +71,9 @@ export const MovieList = () => {
 
   return (
     <Stack as="section" className="movie-list">
-      {listMovies.length > 0 ? (
-        listMovies.map((movie) => (
-          <MovieCardWithModal key={movie.id} movie={movie} />
-        ))
+      <ModalMovie />
+      {list.length > 0 ? (
+        list.map((movie) => <MovieCard key={movie.id} movie={movie} />)
       ) : (
         <Text as="p">No se encontraron resultados</Text>
       )}

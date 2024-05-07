@@ -2,17 +2,29 @@ import "./DateSelector.scss";
 import { useEffect, useState } from "react";
 import { Dropdown, IDropdownOption, Label, Stack } from "@fluentui/react";
 import { useAppDispatch } from "hooks/useAppDispatch";
-import { getAllMovies, getSearchMovie } from "store/actions";
+import { getAllMovies, getSearchMovie } from "store/actions/movies";
 import { useAppSelector } from "hooks/useAppSelector";
 import UseQueryParam from "hooks/useQueryParam";
-import { OPTION_ALL_VALUES, yearOptions } from "./utils";
+
+const OPTION_ALL_VALUES = "all";
+
+const YEAR_OPTIONS: IDropdownOption[] = Array.from(
+  { length: new Date().getFullYear() - 1950 },
+  (_, index) => {
+    const year = 1950 + index;
+    return {
+      key: year.toString(),
+      text: year.toString(),
+    };
+  }
+);
 
 const DateSelector = () => {
   const [dateSelected, setDateSelected] = useState(OPTION_ALL_VALUES);
   const [firstRender, setFirstRender] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
-  const { searchQuery } = useAppSelector((state) => state.movies);
+  const { movies } = useAppSelector((state) => state.movies);
   const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
 
   const yearParam = getQueryParam("year");
@@ -54,8 +66,8 @@ const DateSelector = () => {
       return;
     }
 
-    dispatch(actionGetMovies(dateSelected, searchQuery));
-  }, [dateSelected, searchQuery]);
+    dispatch(actionGetMovies(dateSelected, movies.searchQuery));
+  }, [dateSelected, movies.searchQuery]);
 
   useEffect(() => {
     if (yearParam) {
@@ -66,13 +78,15 @@ const DateSelector = () => {
 
   return (
     <Stack as="div" className="date-selector">
-      <Label htmlFor="year">Filtrar por año:</Label>
+      <Label htmlFor="year" className="date-selector_label">
+        Filtrar por año:
+      </Label>
       <Dropdown
         id="year"
         placeholder="Seleccione un año"
         selectedKey={dateSelected}
         onChange={handleYearChange}
-        options={[{ key: OPTION_ALL_VALUES, text: "Todos" }, ...yearOptions]}
+        options={[{ key: OPTION_ALL_VALUES, text: "Todos" }, ...YEAR_OPTIONS]}
         className="date-selector_dropdown"
       />
     </Stack>
