@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# Prueba técnica — React developer - RAONA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instrucciones de ejecución
 
-Currently, two official plugins are available:
+- Para inicializar la aplicación utilice el script:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm run start
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Esto ejecutará los comandos: **npm install**, **node createEnv.js** (archivo que genera el .env basándose en el .env.example) y **npm run dev**.
+
+## Decisiones de desarrollo y arquitectura
+
+- El proyecto se inicializó utilizando Vite.js con SWC.
+- Para la estructura de carpetas de componentes se utilizó la metodología de Atomic Design.
+- Para la nomeclatura de clases se aplicó la técnica BEM.
+
+## Dependecias instaladas (EXTRAS)
+
+- Zod: es una librería de validación y declaración de esquemas basada en TypeScript. Esto permitió validar los datos que se obtienen del servicio web y guardar únicamente los datos a utilizar gracias al parseado que ofrece. También facilitó la creación de tipos debido a la inferencia de los esquemas.
+
+## Cuestionario
+### ¿Cómo decidió las opciones técnicas y arquitectónicas utilizadas como parte de su solución?
+- **Atomic Design**: Es práctico para crear sistemas de diseño modulares y escalables. Se basa en el concepto de descomponer una interfaz de usuario en elementos más pequeños y simples y luego combinar estos elementos para construir interfaces de usuario más complejas. Al adoptar Atomic Design, se puede lograr una mayor coherencia visual, flexibilidad y reutilización de componentes en el desarrollo.
+- **BEM**: Se basa en la idea de dividir el código CSS en bloques independientes, elementos y modificadores. Es recomendado en la documentación de Sass.
+
+### ¿Hay alguna mejora que pueda hacer en su envío?
+- Mejorar la perfomance de la app utilizando herramientas como Lighthouse.
+
+### ¿Qué haría de manera diferente si se le asignara más tiempo?
+- Buscaría abstraer un poco más la lógica en los componentes para evitar redundancias y generar funciones reutilizables.
+- Crearía un theme para crear estilos predeterminados y mantener un sistema de diseño.
