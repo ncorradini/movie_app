@@ -67,7 +67,7 @@ const DateSelector = () => {
     }
 
     dispatch(actionGetMovies(dateSelected, movies.searchQuery));
-  }, [dateSelected, movies.searchQuery]);
+  }, [dateSelected]);
 
   useEffect(() => {
     if (yearParam) {
