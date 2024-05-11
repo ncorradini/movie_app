@@ -3,8 +3,8 @@ import { Stack, Text } from "@fluentui/react";
 import { IMAGE_URL } from "utils/constants";
 import Image from "@Atoms/Image/Image";
 import { TMovie } from "utils/schemas/movies.schema";
-import { useAppDispatch } from "hooks/useAppDispatch";
 import { setMovieModalId } from "store/slice";
+import { useAppDispatch } from "@Hooks/useAppDispatch";
 
 type CardProps = {
   movie: TMovie;

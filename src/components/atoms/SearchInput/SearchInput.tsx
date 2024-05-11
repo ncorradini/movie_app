@@ -1,29 +1,32 @@
 import "./SearchInput.scss";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField } from "@fluentui/react";
-import { useAppDispatch } from "hooks/useAppDispatch";
 import { getAllMovies, getSearchMovie } from "store/actions/movies";
 import { setSearchQuery } from "store/slice";
-import { useAppSelector } from "hooks/useAppSelector";
-import UseQueryParam from "hooks/useQueryParam";
+import { useAppSelector } from "@Hooks/useAppSelector";
+import { useAppDispatch } from "@Hooks/useAppDispatch";
+import { UseQueryParam } from "@Hooks/useQueryParam";
+import { useDebounce } from "@Hooks/useDebounce";
 
 const SearchInput = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [firstRender, setFirstRender] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
   const {
     movies: { searchQuery },
   } = useAppSelector((state) => state.movies);
-  const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
 
+  const { getQueryParam, updateQueryParam, deleteQueryParam } = UseQueryParam();
   const yearParam = getQueryParam("year");
+
+  const debouncedSearchTerm = useDebounce(searchQuery, 500);
 
   const handleSearch = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const searchTerm = (e.target as HTMLInputElement).value;
-    setSearchTerm(searchTerm);
+
+    dispatch(setSearchQuery({ query: searchTerm }));
 
     if (searchTerm.trim() !== "") {
       deleteQueryParam("page");
@@ -34,20 +37,24 @@ const SearchInput = () => {
   };
 
   useEffect(() => {
-    if (searchTerm) {
-      dispatch(setSearchQuery({ query: searchTerm }));
+    if (debouncedSearchTerm) {
       dispatch(
-        getSearchMovie({ query: searchTerm, year: yearParam || undefined })
+        getSearchMovie({
+          query: debouncedSearchTerm,
+          year: yearParam || undefined,
+        })
       );
     }
+  }, [debouncedSearchTerm]);
 
-    if (!firstRender && searchTerm === "") {
+  useEffect(() => {
+    if (!firstRender && searchQuery === "") {
       dispatch(setSearchQuery({ query: "" }));
       dispatch(getAllMovies({}));
     }
 
     setFirstRender(false);
-  }, [searchTerm]);
+  }, [searchQuery]);
 
   return (
     <TextField
