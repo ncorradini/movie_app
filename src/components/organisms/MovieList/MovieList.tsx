@@ -2,40 +2,31 @@ import "./MovieList.scss";
 import { useEffect } from "react";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
+import UseQueryParam from "hooks/useQueryParam";
 import { getAllMovies, getSearchMovie } from "store/actions/movies";
+import { setSearchQuery } from "store/slice";
+import { parseNumberQueryParam } from "utils/parseNumberQueryParam";
 import { Spinner, Stack } from "@fluentui/react";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
-import { setSearchQuery } from "store/slice";
-import UseQueryParam from "hooks/useQueryParam";
-import MovieCard from "@Molecules/MovieCard/MovieCard";
 import ModalMovie from "@Molecules/ModalMovie/ModalMovie";
-import NotResultsView from "@Atoms/NotResultsView/NotResultsView";
+import MovieListContent from "@Molecules/MovieListContent/MovieListContent";
 
 export const MovieList = () => {
-  const { getQueryParam, deleteQueryParam } = UseQueryParam();
+  const { getQueryParam } = UseQueryParam();
   const searchParam = getQueryParam("search");
   const pageParam = getQueryParam("page");
   const yearParam = getQueryParam("year");
 
   const dispatch = useAppDispatch();
   const {
-    movies: { list, isLoading, isError },
+    movies: { isLoading, isError },
   } = useAppSelector((state) => state.movies);
 
   const reloadPage = () => window.location.reload();
 
   const fetchMovies = () => {
-    let page = pageParam || "1";
-    if (isNaN(parseInt(page))) {
-      deleteQueryParam("page");
-      page = "1";
-    }
-
-    let year = yearParam || undefined;
-    if (year && isNaN(parseInt(year))) {
-      deleteQueryParam("year");
-      year = undefined;
-    }
+    const page = parseNumberQueryParam(pageParam, undefined);
+    const year = parseNumberQueryParam(yearParam, undefined);
 
     if (searchParam) {
       dispatch(setSearchQuery({ query: searchParam }));
@@ -73,11 +64,7 @@ export const MovieList = () => {
   return (
     <Stack as="section" className="movie-list">
       <ModalMovie />
-      {list.length > 0 ? (
-        list?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-      ) : (
-        <NotResultsView />
-      )}
+      <MovieListContent />
     </Stack>
   );
 };
