@@ -23,10 +23,10 @@
     /* Paths */
     "baseUrl": "./src",
     "paths": {
-      "@Templates/*": ["./components/templates/*"],
-      "@Organisms/*": ["./components/organisms/*"],
-      "@Molecules/*": ["./components/molecules/*"],
-      "@Atoms/*": ["./components/atoms/*"]
+      "@Hooks/*": ["hooks/*"],
+      "@Organisms/*": ["components/organisms/*"],
+      "@Molecules/*": ["components/molecules/*"],
+      "@Atoms/*": ["components/atoms/*"]
     }
   },
   "include": ["src"],

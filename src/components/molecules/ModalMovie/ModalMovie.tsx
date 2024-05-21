@@ -9,12 +9,12 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useAppSelector } from "hooks/useAppSelector";
 import { getMovieById } from "store/actions/movie-modal";
 import { clearMovieModalCache, setMovieModalId } from "store/slice";
 import { IMAGE_URL_HIGH_DEFINITION } from "utils/constants";
 import ErrorView from "@Atoms/ErrorView/ErrorView";
+import { useAppDispatch } from "@Hooks/useAppDispatch";
+import { useAppSelector } from "@Hooks/useAppSelector";
 
 const ModalMovie = () => {
   const dispatch = useAppDispatch();

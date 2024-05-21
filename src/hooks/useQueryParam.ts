@@ -1,4 +1,4 @@
-const UseQueryParam = () => {
+export const UseQueryParam = () => {
   const urlParams = new URLSearchParams(window.location.search);
 
   const updateQueryParam = (paramName: string, paramValue: string) => {
@@ -25,5 +25,3 @@ const UseQueryParam = () => {
 
   return { updateQueryParam, getQueryParam, deleteQueryParam };
 };
-
-export default UseQueryParam;

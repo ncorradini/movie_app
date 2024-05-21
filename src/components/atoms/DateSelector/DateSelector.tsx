@@ -1,10 +1,10 @@
 import "./DateSelector.scss";
 import { useEffect, useState } from "react";
 import { Dropdown, IDropdownOption, Label, Stack } from "@fluentui/react";
-import { useAppDispatch } from "hooks/useAppDispatch";
 import { getAllMovies, getSearchMovie } from "store/actions/movies";
-import { useAppSelector } from "hooks/useAppSelector";
-import UseQueryParam from "hooks/useQueryParam";
+import { useAppDispatch } from "@Hooks/useAppDispatch";
+import { useAppSelector } from "@Hooks/useAppSelector";
+import { UseQueryParam } from "@Hooks/useQueryParam";
 
 const OPTION_ALL_VALUES = "all";
 

@@ -1,9 +1,9 @@
 import "./PageSelector.scss";
-import { useAppSelector } from "hooks/useAppSelector";
 import { PrimaryButton, Stack, Text } from "@fluentui/react";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import UseQueryParam from "hooks/useQueryParam";
 import { getAllMovies, getSearchMovie } from "store/actions/movies";
+import { useAppDispatch } from "@Hooks/useAppDispatch";
+import { UseQueryParam } from "@Hooks/useQueryParam";
+import { useAppSelector } from "@Hooks/useAppSelector";
 
 enum PageDirection {
   NEXT = "next",
