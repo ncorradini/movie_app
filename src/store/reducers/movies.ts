@@ -17,6 +17,7 @@ export const handleMoviesRequestFulfilled = (
 ) => {
   state.movies.isLoading = false;
   state.movies.list = action.payload.results;
+  state.movies.existResults = action.payload.results.length > 0;
   state.movies.pagination.page = action.payload.page;
   state.movies.pagination.totalPages = action.payload.total_pages;
 };
